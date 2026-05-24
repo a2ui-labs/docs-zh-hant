@@ -182,6 +182,6 @@ TODO：補充自訂字型示例。
 
 ## 下一步
 
-- **[自訂元件](custom-components.md)**：用你的樣式來建立自訂元件
+- **[自訂元件](authoring-components.md)**：用你的樣式來建立自訂元件
 - **[元件參考](../reference/components.md)**：查看所有元件的樣式選項
 - **[客戶端設定](client-setup.md)**：在你的應用中設定渲染器

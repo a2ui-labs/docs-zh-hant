@@ -17,7 +17,7 @@
 
 元件目錄就是元件的集合 - 可以是標準元件、自訂元件，或共用函式庫。**重點是你的設計系統。** 你可以註冊任何元件與函式的集合，A2UI 都能與之運作。catalog 只是 Agent 與 renderer 之間的契約。
 
-若要擴充或取代標準目錄，請參閱 [自訂元件](custom-components.md)。
+若要擴充或取代標準目錄，請參閱 [自訂元件](authoring-components.md)。
 
 ## 共用 Web 函式庫
 
@@ -159,6 +159,6 @@ TODO：新增錯誤處理範例。
 
 - **[Quickstart](../quickstart.md)**：試試看示範應用程式
 - **[主題與樣式](theming.md)**：自訂外觀與風格
-- **[自訂元件](custom-components.md)**：擴充元件目錄
+- **[自訂元件](authoring-components.md)**：擴充元件目錄
 - **[Agent Development](agent-development.md)**：建立會產生 A2UI 的 agent
 - **[Reference Documentation](../reference/messages.md)**：深入了解協定

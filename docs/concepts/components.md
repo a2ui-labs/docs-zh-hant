@@ -252,7 +252,7 @@ surface 是一個完整且一致的 UI（表單、儀表板、聊天介面等）
 
 自訂元件會由 client 的 renderer 向 LLM **公開宣告**。LLM 之後就能在標準目錄之外一併使用它們。
 
-實作細節請參閱 [自訂元件指南](../guides/custom-components.md)。
+實作細節請參閱 [自訂元件指南](../guides/authoring-components.md)。
 
 ## 最佳實務
 

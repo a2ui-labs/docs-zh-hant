@@ -646,5 +646,5 @@ npm start -- gallery
 
         [:material-code-json: 基本 Catalog 定義（JSON Schema）](https://a2ui.org/specification/v0_9/basic_catalog.json)
 
-- **[自訂元件指南](../guides/custom-components.md)**：建立自己的元件
+- **[自訂元件指南](../guides/authoring-components.md)**：建立自己的元件
 - **[主題指南](../guides/theming.md)**：讓元件風格符合你的品牌

@@ -16,7 +16,7 @@
 - 跨平台：Web、行動端、桌面端
 - 可互通：開源，同一份規範可搭配多個渲染器
 
-**開始使用：** [客戶端設定](../guides/client-setup.md) | [主題與樣式](../guides/theming.md) | [自訂元件](../guides/custom-components.md)
+**開始使用：** [客戶端設定](../guides/client-setup.md) | [主題與樣式](../guides/theming.md) | [自訂元件](../guides/authoring-components.md)
 
 ### 2. 智慧體開發者（後端 / AI）
 

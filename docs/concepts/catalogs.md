@@ -6,9 +6,9 @@
 
 ## 目錄定義
 
-目錄是一個 [JSON Schema 檔案](../specification/v0_9/json/client_capabilities.json#L62C5-L95C6)，用來列出智慧體可用來定義 A2UI surface 的元件、函式與主題。智慧體送出的所有 A2UI JSON 都會依照選定的目錄進行驗證。
+目錄是一個 [JSON Schema 檔案](../../specification/v0_9/json/client_capabilities.json#L62C5-L95C6)，用來列出智慧體可用來定義 A2UI surface 的元件、函式與主題。智慧體送出的所有 A2UI JSON 都會依照選定的目錄進行驗證。
 
-下方是 [目錄 JSON Schema](../specification/v0_9/json/client_capabilities.json#L62C5-L95C6)：
+下方是 [目錄 JSON Schema](../../specification/v0_9/json/client_capabilities.json#L62C5-L95C6)：
 
 ```json
 {
@@ -59,7 +59,7 @@
 
 ### 基礎目錄
 
-為了幫助開發者快速上手，A2UI 團隊維護了一份 [基礎目錄](../specification/v0_9/json/basic_catalog.json)。
+為了幫助開發者快速上手，A2UI 團隊維護了一份 [基礎目錄](../../specification/v0_9/catalogs/basic/catalog.json)。
 
 這是一份預先定義好的目錄檔，包含一組通用元件（Button、Input、Card）與函式。它不是某種特別的目錄「類型」；它只是我們已經寫好、且已有開源渲染器支援的目錄版本。
 
@@ -67,7 +67,7 @@
 
 由於 A2UI 的設計目標是讓 LLM 在設計時或執行時都能生成 UI，我們不認為可攜性需要在多個客戶端之間使用統一的目錄；LLM 可以針對每個前端單獨理解各自的目錄。
 
-[查看 A2UI v0.9 基礎目錄](../specification/v0_9/json/basic_catalog.json)
+[查看 A2UI v0.9 基礎目錄](../../specification/v0_9/catalogs/basic/catalog.json)
 
 ### 定義自己的目錄
 
@@ -77,7 +77,7 @@
 
 為了簡化實作，我們建議直接讓目錄反映客戶端的設計系統，而不是透過轉接器把基礎目錄映射過去。由於 A2UI 是為 GenUI 設計的，我們預期 LLM 能理解不同客戶端對應不同目錄。
 
-[查看 Rizzcharts 目錄範例](../samples/agent/adk/rizzcharts/rizzcharts_catalog_definition.json)
+[查看 Rizzcharts 目錄範例](../../samples/agent/adk/rizzcharts/catalog_schemas/0.9/rizzcharts_catalog_definition.json)
 
 ### 建議
 
@@ -88,7 +88,7 @@
 
 ## 建立目錄
 
-目錄是一份符合 [目錄 schema](../specification/v0_9/json/client_capabilities.json#L62C5-L95C6) 的 JSON Schema 檔案，用來定義智慧體在建立 surface 時可以使用的元件、主題與函式。
+目錄是一份符合 [目錄 schema](../../specification/v0_9/json/client_capabilities.json#L62C5-L95C6) 的 JSON Schema 檔案，用來定義智慧體在建立 surface 時可以使用的元件、主題與函式。
 
 ### 範例：最小目錄
 
@@ -269,7 +269,7 @@ export class HelloWorldBanner extends DynamicComponent {
 }
 ```
 
-你可以在 [Rizzcharts 示範](../samples/client/angular/projects/rizzcharts/src/a2ui-catalog/catalog.ts) 中看到可運作的客戶端渲染器範例。
+你可以在 [Rizzcharts 示範](../../samples/client/angular/projects/rizzcharts/src/a2ui-catalog/catalog.ts) 中看到可運作的客戶端渲染器範例。
 
 ## A2UI 目錄協商
 
@@ -292,7 +292,7 @@ export class HelloWorldBanner extends DynamicComponent {
         "description": "Provides agent driven UI using the A2UI JSON format.",
         "params": {
           "supportedCatalogIds": [
-            "https://a2ui.org/specification/v0_9/basic_catalog.json",
+            "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
             "https://github.com/.../rizzcharts_catalog_definition.json"
           ]
         }
@@ -318,7 +318,7 @@ export class HelloWorldBanner extends DynamicComponent {
   "metadata": {
     "a2uiClientCapabilities": {
       "supportedCatalogIds": [
-        "https://a2ui.org/specification/v0_9/basic_catalog.json",
+        "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json",
         "https://github.com/.../rizzcharts_catalog_definition.json"
       ]
     }
@@ -336,7 +336,7 @@ export class HelloWorldBanner extends DynamicComponent {
 {
   "createSurface": {
     "surfaceId": "salesDashboard",
-    "catalogId": "https://a2ui.org/specification/v0_9/basic_catalog.json"
+    "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json"
   }
 }
 ```
@@ -455,4 +455,4 @@ A2UI 元件目錄需要版本控制，因為目錄定義通常是在編譯期建
 
 ## 內聯目錄
 
-客戶端在執行期送出的內聯目錄是支援的，但不建議用在生產環境。更多細節可見 [這裡](../specification/v0_9/docs/a2ui_protocol.md#client-capabilities--metadata)。
+客戶端在執行期送出的內聯目錄是支援的，但不建議用在生產環境。更多細節可見 [這裡](../../specification/v0_9/docs/a2ui_protocol.md#client-capabilities--metadata)。

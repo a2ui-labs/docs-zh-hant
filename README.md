@@ -2,15 +2,15 @@
 
 A2UI 是一個開源專案，提供一套適合表達「可更新、由智慧體生成的 UI」的格式，以及初始渲染器集合，讓智慧體能夠生成或填入豐富的使用者介面。
 
-<img src="docs/assets/a2ui_gallery_examples.png" alt="A2UI 元件畫廊" height="400">
+<img src="docs/public/assets/a2ui_gallery_examples.png" alt="A2UI 元件畫廊" height="400">
 
 *A2UI 渲染卡片的示例畫廊，展示它可以實現的多種介面組合。*
 
-> **目前狀態：** 此目錄用於維護 A2UI 文件的繁體中文版本，文件樹結構與上游 `A2UI/docs` 保持一致。
+> **目前狀態：** 此目錄用於維護 A2UI 文件的繁體中文版本，文件樹結構與上游 `A2UI/docs/public` 保持一致。
 
 ## ⚠️ 狀態：早期公開預覽
 
-> **說明：** A2UI 目前處於 **v0.8（公開預覽）** 階段。規範與實作已可使用，但仍持續演進中。我們開放此專案，是為了促進協作、收集回饋，並邀請社群貢獻（尤其是客戶端渲染器相關部分）。後續預期仍會有變更。
+> **說明：** A2UI 目前的正式發行版本是 **v0.9.1**，屬於穩定的 v0.9 協議家族中的一個修訂版。v1.0 規範目前是候選版本，v0.8 則已列為舊版。規範與實作已可使用，但仍持續演進中。我們開放此專案，是為了促進協作、收集回饋，並邀請社群貢獻（尤其是客戶端渲染器相關部分）。後續預期仍會有變更。
 
 ## 概述
 
@@ -44,7 +44,7 @@ A2UI 的設計目標，是解決智慧體生成式或範本式 UI 回應在跨�
 A2UI 明確區分「生成 UI」與「執行 UI」：
 
 1. **生成**：智慧體（使用 Gemini 或其他 LLM）生成，或使用一份預先生成的 `A2UI Response`，也就是描述 UI 元件結構與其屬性的 JSON 載荷。
-2. **傳輸**：該訊息被送到客戶端應用（透過 A2A、AG UI 等）。
+2. **傳輸**：該訊息被送到客戶端應用（透過 A2A、AG-UI 等）。
 3. **解析**：客戶端中的 **A2UI Renderer** 解析這段 JSON。
 4. **渲染**：Renderer 將抽象元件（例如 `type: 'text-field'`）對映到客戶端程式碼中的具體實作。
 
@@ -52,70 +52,60 @@ A2UI 明確區分「生成 UI」與「執行 UI」：
 
 A2UI 被設計為一種輕量格式，但它適用於更大的生態系：
 
-* **傳輸層**：相容於 **A2A Protocol** 與 **AG UI**。
+* **傳輸層**：相容於 **A2A Protocol** 與 **AG-UI**。
 * **LLM**：凡是能輸出 JSON 的模型，都可以生成 A2UI。
 * **宿主框架**：需要使用受支援框架建立宿主應用（目前主要是 Web 或 Flutter）。
 
 ## 開始使用
 
-理解 A2UI 最好的方式，就是先執行示例。
+依你想從哪裡切入，挑選對應的路徑：
 
-### 前置條件
+| 路徑                                                                                                                          | 你會得到什麼                                                                                                                            | 時間   |
+| ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| 🍜 **[Quickstart Restaurant Finder 示例](https://a2ui.org/quickstart/)**                                                      | 在本機執行完整的 A2UI 全端範例，搭配 Gemini 驅動的 ADK 智慧體與 Lit renderer。從頭到尾學習 A2UI，並依你的使用情境調整。 | ~5 分鐘 |
+| ⚛️ **[在任意 Agent 框架與 Harness 中使用 A2UI](docs/public/guides/a2ui-with-any-agent-framework.md)**                     | 為你選定的框架或 Harness 建立 AG-UI 應用或 Harness 腳手架，接著在 AG-UI 之上啟用 A2UI 渲染。                                   | ~5 分鐘 |
+| 🎨 **[A2UI Composer](https://a2ui-composer.ag-ui.com/)** · **[Widget Builder](https://go.copilotkit.ai/A2UI-widget-builder)** | 透過視覺化編輯器產生 A2UI JSON，貼到任何智慧體 prompt 中即可使用 — 不需安裝。                                                       | ~1 分鐘 |
+| 🎬 **[A2UI Theater](https://a2ui-composer.ag-ui.com/theater)**                                                                | 逐步查看預先建置好的 A2UI 串流情境，涵蓋 Lit、React 與 Angular renderer — 不需安裝。                                         | ~1 分鐘 |
 
-* Node.js（用於 Web 客戶端）
-* Python（用於智慧體示例）
-* 執行示例需要有效的 [Gemini API Key](https://aistudio.google.com/)
+### Restaurant Finder 示例 — 摘要
 
-### 執行 Restaurant Finder 示例
+前置條件：Node.js 18+（並啟用 [Corepack](https://nodejs.org/api/corepack.html)）、[uv](https://docs.astral.sh/uv/)，以及一組 [Gemini API 金鑰](https://aistudio.google.com/apikey)。
 
-1. **複製倉庫：**
+```bash
+git clone https://github.com/a2ui-project/a2ui.git
+cd a2ui
+export GEMINI_API_KEY="your_gemini_api_key"
 
-    ```bash
-    git clone https://github.com/google/A2UI.git
-    cd A2UI
-    ```
+# 啟用 Corepack（macOS Homebrew 使用者請見下方提示）
+corepack enable
 
-2. **設定 API Key：**
+yarn install
+cd samples/client/lit
+yarn demo:restaurant
+```
 
-    ```bash
-    export GEMINI_API_KEY="your_gemini_api_key"
-    ```
+> [!TIP]
+> **macOS Homebrew 使用者：** 如果你先前安裝過獨立的套件管理工具，請先解除連結衝突再安裝 Corepack，讓 Corepack 能以專案為單位管理版本：
+>
+> ```bash
+> brew unlink yarn pnpm
+> brew install corepack
+> corepack enable
+> ```
 
-3. **執行智慧體（後端）：**
+以上指令會在各個 workspace 中安裝相依套件、建置 renderer、啟動 Python 智慧體，並在 `http://localhost:5173` 開啟客戶端。逐步操作說明、其他示例與疑難排解，請參閱 **[完整的 Quickstart](docs/public/quickstart.md)**。
 
-    ```bash
-    cd samples/agent/adk/restaurant_finder
-    uv run .
-    ```
+### 在任意 Agent 框架與 Harness 中使用 A2UI — 摘要
 
-4. **執行客戶端（前端）：**
-   打開新的終端機視窗：
+```bash
+npx create-ag-ui-app@latest
+```
 
-    ```bash
-    # 安裝並建置 Markdown renderer
-    cd renderers/markdown/markdown-it
-    npm install
-    npm run build
+使用 AG-UI CLI 搭配你選定的框架或 Harness（Google Chat、ADK、LangGraph、CrewAI、Mastra、Strands、Slack、Teams 等），接著依照 **[AG-UI 指南](docs/public/guides/a2ui-with-any-agent-framework.md)** 啟用 A2UI 渲染。部分腳手架路徑底層是以 Next.js 搭配 [CopilotKit 的 A2UI runtime](https://docs.copilotkit.ai/generative-ui/a2ui) 實作，但整體設定介面仍以 AG-UI 為優先。
 
-    # 安裝並建置 Web Core library
-    cd ../../web_core
-    npm install
-    npm run build
+### 其他 Renderer
 
-    # 安裝並建置 Lit renderer
-    cd ../lit
-    npm install
-    npm run build
-
-    # 安裝並執行 shell client
-    cd ../../samples/client/lit/shell
-    npm install
-    npm run dev
-    ```
-
-如果你是 Flutter 開發者，也可以看看 [GenUI SDK](https://github.com/flutter/genui)，它底層使用的就是 A2UI。
-
-CopilotKit 也提供一個公開可試用的 [A2UI Widget Builder](https://go.copilotkit.ai/A2UI-widget-builder)。
+若你是 Flutter 開發者，可以參考 [GenUI SDK](https://github.com/flutter/genui)，它底層使用的就是 A2UI。完整的客戶端實作清單請見 [docs/public/reference/renderers.md](docs/public/reference/renderers.md)。
 
 ## 路線圖
 

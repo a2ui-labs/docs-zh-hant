@@ -7,7 +7,7 @@
 
 ## Web 渲染器：使用 `@a2ui/web_core`（`web_core`）
 
-如果你正在為 Web（React、Vue、Svelte 等）建立 renderer，就不需要從零實作訊息處理、狀態管理或 schema 驗證。**[`@a2ui/web_core`](https://github.com/a2ui-project/a2ui/tree/main/renderers/web_core)** 套件（`web_core`）提供了所有維護中 Lit、Angular 與 React renderer 共用的框架無關邏輯。
+如果你正在為 Web（React、Vue、Svelte 等）建立 renderer，就不需要從零實作訊息處理、狀態管理或 schema 驗證。**[`@a2ui/web_core`](../../../renderers/web_core)** 套件（`web_core`）提供了所有維護中 Lit、Angular 與 React renderer 共用的框架無關邏輯。
 
 ### `web_core` 提供什麼
 
@@ -46,7 +46,7 @@ import * as Styles from '@a2ui/web_core/styles/index';
 2. **訂閱 `web_core` 的狀態變更**，並重新渲染
 3. **透過 `MessageProcessor` 把使用者操作往回傳送**
 
-請參考 [React renderer](https://github.com/a2ui-project/a2ui/tree/main/renderers/react)、[Lit renderer](https://github.com/a2ui-project/a2ui/tree/main/renderers/lit) 與 [Angular renderer](https://github.com/a2ui-project/a2ui/tree/main/renderers/angular) 來看這個模式的實作範例。
+請參考 [React renderer](../../../renderers/react)、[Lit renderer](../../../renderers/lit) 與 [Angular renderer](../../../renderers/angular) 來看這個模式的實作範例。
 
 ### 版本支援
 

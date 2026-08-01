@@ -23,13 +23,13 @@
 
 A2UI 倉庫中提供了幾個可以參考的示例智慧體：
 
-- [Restaurant Finder](https://github.com/a2ui-project/a2ui/tree/main/samples/agent/adk/restaurant_finder)
+- [Restaurant Finder](../../../samples/agent/adk/restaurant_finder)
     - 使用表單完成訂位
     - 以 ADK 撰寫
-- [Rizzcharts](https://github.com/a2ui-project/a2ui/tree/main/samples/community/agent/adk/rizzcharts/python)
+- [Rizzcharts](../../../samples/community/agent/adk/rizzcharts/python)
     - A2UI 自訂元件示例
     - 以 ADK 撰寫
-- [Orchestrator](https://github.com/a2ui-project/a2ui/tree/main/samples/community/agent/adk/orchestrator)
+- [Orchestrator](../../../samples/community/agent/adk/orchestrator)
     - 轉送來自遠端子智慧體的 A2UI 訊息
     - 以 ADK 撰寫
 

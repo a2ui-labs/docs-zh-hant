@@ -12,7 +12,7 @@
 
 ## 快速開始：執行範例
 
-關於如何執行此範例的詳細說明，請參閱 [README.md](https://github.com/a2ui-project/a2ui/blob/main/samples/community/mcp/a2ui-in-mcpapps/README.md)。
+關於如何執行此範例的詳細說明，請參閱 [README.md](../../../samples/community/mcp/a2ui-in-mcpapps/README.md)。
 
 ## 架構概覽
 
@@ -153,7 +153,7 @@ sequenceDiagram
 MCP Apps 通常作為單一 HTML resource 從 MCP Server 交付。要用 Angular 或 React 這樣的現代框架實作這一點：
 
 1.  正常建構你的應用，產出靜態資源（`index.html`、`.js`、`.css`）。
-2.  使用建構後腳本（例如範例中的 [`inline.js`](https://github.com/a2ui-project/a2ui/blob/main/samples/community/mcp/a2ui-in-mcpapps/server/apps/src/inline.js) 腳本）讀取 `index.html`，並把外部 `<script src="...">` 與 `<link rel="stylesheet" href="...">` 標籤替換為內聯 `<script>` 與 `<style>` 標籤，內容為實際檔案內容。
+2.  使用建構後腳本（例如範例中的 [`inline.js`](../../../samples/community/mcp/a2ui-in-mcpapps/server/apps/src/inline.js) 腳本）讀取 `index.html`，並把外部 `<script src="...">` 與 `<link rel="stylesheet" href="...">` 標籤替換為內聯 `<script>` 與 `<style>` 標籤，內容為實際檔案內容。
 3.  這樣會生成一個自包含 HTML 檔案，可以透過受限 iframe 的 `srcdoc` 安全加載。
 
 > [!TIP]
@@ -187,7 +187,7 @@ MCP Apps 通常作為單一 HTML resource 從 MCP Server 交付。要用 Angular
 1.  將 **A2UI Angular/Lit 庫** 包含進 app bundle。
 2.  與 Host 定義通訊契約，以便與 MCP Server 互動。
 3.  收到 Host 回應後，在 content 中查找 `application/a2ui+json` mimeType。
-4.  解析 JSON 文本，並傳給 A2UI [`MessageProcessor`](https://github.com/a2ui-project/a2ui/blob/main/renderers/angular/src/v0_8/data/processor.ts)。
+4.  解析 JSON 文本，並傳給 A2UI [`MessageProcessor`](../../../renderers/angular/src/v0_8/data/processor.ts)。
 
 **範例：取得並渲染 A2UI**
 
@@ -243,7 +243,7 @@ function callHostMethod(method: string, params: any = {}): Promise<any> {
 **範例：處理使用者 Action**
 
 ```typescript
-// Subscribing to A2UI events in the MCP App ([main.ts](https://github.com/a2ui-project/a2ui/blob/main/samples/community/mcp/a2ui-in-mcpapps/server/apps/src/src/main.ts))
+// Subscribing to A2UI events in the MCP App ([main.ts](../../../samples/community/mcp/a2ui-in-mcpapps/server/apps/src/src/main.ts))
 this.processor.events.subscribe(async event => {
   if (!event.message.userAction) return;
 

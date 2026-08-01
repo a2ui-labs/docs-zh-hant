@@ -106,45 +106,77 @@ Catalog schema 定義了你的 catalog API。它列出可用元件及其屬性�
 
 ## 2. 實作元件（客戶端）
 
-使用客戶端框架實作元件。對於 Angular，元件應繼承 `@a2ui/angular` 提供的 `DynamicComponent`。
+使用客戶端框架實作元件。對於 Angular，元件應繼承 `@a2ui/angular/v0_9` 提供的 `CatalogComponent`。
 
-在 [`orchestrator`](../../../samples/community/client/angular/projects/orchestrator/README.md) 範例中，`Chart` 元件定義在 [`chart.ts`](../../../samples/community/client/angular/projects/orchestrator/src/a2ui-catalog/chart.ts)。
+在 `rizzcharts` 範例中，`Chart` 元件定義在 `chart.ts`。
 
-{% raw %}
+首先，用 TypeScript 定義元件 API。這應該要對應到步驟 1 中定義的 JSON Schema。
 
 ```typescript
-import {DynamicComponent} from '@a2ui/angular';
-import * as Primitives from '@a2ui/web_core/types/primitives';
-import * as Types from '@a2ui/web_core/types/types';
-import {Component, computed, input, Signal, signal} from '@angular/core';
+// api.ts
+import {ComponentApi} from '@a2ui/web_core/v0_9';
+import {z} from 'zod';
+
+export const ChartApi = {
+  name: 'Chart',
+  schema: z.object({
+    type: z.enum(['doughnut', 'pie']),
+    title: z.string().optional(),
+    chartData: z.array(
+      z.object({
+        label: z.string(),
+        value: z.number(),
+        drillDown: z.array(
+          z.object({
+            label: z.string(),
+            value: z.number(),
+          })
+        ).optional(),
+      })
+    ),
+  }).strict(),
+} satisfies ComponentApi;
+```
+
+接著實作 Angular 元件：
+
+```typescript
+import {CatalogComponent} from '@a2ui/angular/v0_9';
+import {Component, computed} from '@angular/core';
+import {BaseChartDirective} from 'ng2-charts';
+import {ChartApi} from './api';
 
 @Component({
   selector: 'a2ui-chart',
+  imports: [BaseChartDirective],
   template: `
     <div>
-      <h2>{{ resolvedTitle() }}</h2>
-      <canvas baseChart [data]="currentData()" [type]="chartType()"></canvas>
+      <h2>{{ title() }}</h2>
+      <canvas baseChart [data]="chartData()" [type]="chartType()"></canvas>
     </div>
   `,
 })
-export class Chart extends DynamicComponent<Types.CustomNode> {
-  readonly type = input.required<string>();
-  protected readonly chartType = computed(() => this.type() as ChartType);
-
-  readonly title = input<Primitives.StringValue | null>();
-  protected readonly resolvedTitle = computed(() => super.resolvePrimitive(this.title() ?? null));
-
-  readonly chartData = input.required<Primitives.StringValue | null>();
-  // ... data resolution logic using super.resolvePrimitive for data paths
+export class Chart extends CatalogComponent<typeof ChartApi> {
+  protected readonly chartType = computed(() => this.props()['type']?.value() || 'pie');
+  protected readonly title = computed(() => this.props()['title']?.value() || '');
+  protected readonly chartData = computed(() => {
+    const rawData = this.props()['chartData']?.value() || [];
+    return {
+      labels: rawData.map(item => item.label),
+      datasets: [
+        {
+          data: rawData.map(item => item.value),
+        },
+      ],
+    };
+  });
 }
 ```
 
-{% endraw %}
-
 實作元件時請注意這些要點：
 
-- **繼承 `DynamicComponent`**：這樣可以存取 `resolvePrimitive` 來解析資料繫結。
-- **使用 Angular Inputs**：將 schema 中的屬性對映到 Angular input。
+- **繼承 `CatalogComponent`**：這樣可以存取型別安全的 `props` signal input。
+- **使用 `props()` Signal**：透過 `this.props()['propertyName']?.value()` 以反應式方式存取已解析的屬性。框架會自動處理資料繫結與運算式的解析。
 
 ---
 
@@ -152,32 +184,28 @@ export class Chart extends DynamicComponent<Types.CustomNode> {
 
 元件實作完成後，將其注冊到客戶端 catalog。這個步驟會把元件名（agent 使用的名稱）對映到實作類。
 
-在 [`orchestrator`](../../../samples/community/client/angular/projects/orchestrator/README.md) 範例中，這在 [`catalog.ts`](../../../samples/community/client/angular/projects/orchestrator/src/a2ui-catalog/catalog.ts) 中完成。
+你可以使用 `AngularCatalog` 類別來定義你的 catalog。
 
 ```typescript
-import {Catalog, DEFAULT_CATALOG} from '@a2ui/angular';
-import {inputBinding} from '@angular/core';
+import {AngularCatalog, BASIC_COMPONENTS, BASIC_FUNCTIONS} from '@a2ui/angular/v0_9';
+import {Chart} from './chart';
+import {ChartApi} from './api';
 
-export const RIZZ_CHARTS_CATALOG = {
-  ...DEFAULT_CATALOG,
-  Chart: {
-    type: () => import('./chart').then(r => r.Chart),
-    bindings: ({properties}) => [
-      inputBinding('type', () => ('type' in properties && properties['type']) || undefined),
-      inputBinding('title', () => ('title' in properties && properties['title']) || undefined),
-      inputBinding(
-        'chartData',
-        () => ('chartData' in properties && properties['chartData']) || undefined,
-      ),
-    ],
-  },
-} as Catalog;
+const customChartComponent = {
+  ...ChartApi,
+  component: Chart
+};
+
+export const RIZZ_CHARTS_CATALOG = new AngularCatalog(
+  'https://github.com/.../rizzcharts_catalog_definition.json',
+  [...BASIC_COMPONENTS, customChartComponent],
+  BASIC_FUNCTIONS
+);
 ```
 
 注冊要點：
 
-- **懶加載**：使用 `import()` 懶加載元件程式碼。
-- **Input 繫結**：使用 `inputBinding` 將 schema 屬性對映到 Angular input。
+- **即時注冊**：元件類別會直接在 catalog 定義中注冊。
 
 ---
 

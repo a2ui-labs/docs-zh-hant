@@ -22,8 +22,8 @@ Model Context Protocol (MCP) 允許 MCP server 向 host 交付丰富、互動式
 
 ### 架構
 
-1.  **[Sandbox Proxy (`sandbox.html`)](https://github.com/a2ui-project/a2ui/blob/main/samples/client/shared/mcp_apps_inner_iframe/sandbox.html)**：從同源提供的中間 `iframe`。它在維持結構化 JSON-RPC 通道的同時，將原始 DOM 注入與主應用隔離。
-    - 權限：不要在 host 模板中對它啟用 sandbox（例如 [`mcp-app.ts`](https://github.com/a2ui-project/a2ui/blob/main/samples/community/client/lit/mcp-apps-in-a2ui-sample/mcp-app.ts) 或 [`mcp-apps-component.ts`](https://github.com/a2ui-project/a2ui/blob/main/samples/community/client/lit/mcp-apps-in-a2ui-sample/ui/custom-components/mcp-apps-component.ts)）。
+1.  **[Sandbox Proxy (`sandbox.html`)](../../../samples/client/shared/mcp_apps_inner_iframe/sandbox.html)**：從同源提供的中間 `iframe`。它在維持結構化 JSON-RPC 通道的同時，將原始 DOM 注入與主應用隔離。
+    - 權限：不要在 host 模板中對它啟用 sandbox（例如 [`mcp-app.ts`](../../../samples/community/client/lit/mcp-apps-in-a2ui-sample/mcp-app.ts) 或 [`mcp-apps-component.ts`](../../../samples/community/client/lit/mcp-apps-in-a2ui-sample/ui/custom-components/mcp-apps-component.ts)）。
     - Host origin 驗證：驗證訊息來自預期的 host origin。
 2.  **嵌入式應用（內層 iframe）**：最內層的 `iframe`。透過 `srcdoc` 動態注入，並使用受限權限。
     - 權限：`sandbox="allow-scripts allow-forms allow-popups allow-modals"`（**絕不能** 包含 `allow-same-origin`）。

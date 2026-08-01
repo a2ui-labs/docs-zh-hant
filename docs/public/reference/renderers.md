@@ -14,9 +14,9 @@
 
 | 渲染器 | 平台 | v0.8 | v0.9.1 | v1.0 | 連結 |
 |----------|----------|------|------|------|-------|
-| **React** | Web | ✅ 穩定 | ✅ 穩定 | 🚧 規劃中 | [程式碼](https://github.com/a2ui-project/a2ui/tree/main/renderers/react) |
-| **Lit（Web Components）** | Web | ✅ 穩定 | ✅ 穩定 | 🚧 規劃中 | [程式碼](https://github.com/a2ui-project/a2ui/tree/main/renderers/lit) |
-| **Angular** | Web | ✅ 穩定 | ✅ 穩定 | 🚧 規劃中 | [程式碼](https://github.com/a2ui-project/a2ui/tree/main/renderers/angular) |
+| **React** | Web | ✅ 穩定 | ✅ 穩定 | 🚧 規劃中 | [程式碼](../../../renderers/react) |
+| **Lit（Web Components）** | Web | ✅ 穩定 | ✅ 穩定 | 🚧 規劃中 | [程式碼](../../../renderers/lit) |
+| **Angular** | Web | ✅ 穩定 | ✅ 穩定 | 🚧 規劃中 | [程式碼](../../../renderers/angular) |
 | **Flutter（GenUI SDK）** | 行動端 / 桌面端 / Web | ✅ 穩定 | ✅ 穩定 | 🚧 規劃中 | [文件](https://docs.flutter.dev/ai/genui) · [程式碼](https://github.com/flutter/genui) |
 
 ### 行動端
@@ -37,6 +37,7 @@
 - **[A2UI-Android](https://github.com/lmee/A2UI-Android)** — 社群版 Jetpack Compose 渲染器，提供 20+ 個元件（約 15 ⭐，v0.8）
 - **[a2ui-react-native](https://github.com/sivamrudram-eng/a2ui-react-native)** — 面向 iOS/Android 的 React Native 渲染器（約 9 ⭐，v0.8）
 - **[Lynx A2UI](https://lynxjs.org/next/react/genui/a2ui.html)** — 面向 A2UI 的 ReactLynx 渲染器（v0.9）
+- **[AGenUI](https://github.com/AGenUI/AGenUI)** — 跨平台原生渲染器，涵蓋 iOS、Android 與 HarmonyOS。（v0.9）
 
 更多社群專案與提交方式，請參閱 **[完整生態系渲染器清單](../ecosystem/renderers.md)**。
 

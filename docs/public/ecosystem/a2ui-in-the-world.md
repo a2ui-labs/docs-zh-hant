@@ -82,7 +82,7 @@ ADK 整合了 A2UI v0.8 standard catalog，能在聊天介面中直接把符合�
 
 - **內建渲染**：ADK Web 可在開發 UI 中原生渲染 A2UI 元件
 - **A2A 整合**：A2UI 訊息可在 A2A DataPart metadata 與 ADK events 之間轉換
-- **Agent SDK**：[A2UI Python agent SDK](https://github.com/a2ui-project/a2ui/tree/main/agent_sdks/python) 提供 ADK 擴充，讓智慧體能生成 A2UI
+- **Agent SDK**：[A2UI Python agent SDK](../../../agent_sdks/python) 提供 ADK 擴充，讓智慧體能生成 A2UI
 
 **試試看：**
 - [ADK 文件](https://google.github.io/adk-docs/)
@@ -140,12 +140,12 @@ A2UI 社群正在建立許多令人期待的專案：
 
 ### 開源示例
 
-- **Restaurant Finder** ([samples/agent/adk/restaurant_finder](https://github.com/a2ui-project/a2ui/tree/main/samples/agent/adk/restaurant_finder))
+- **Restaurant Finder** ([samples/agent/adk/restaurant_finder](../../../samples/agent/adk/restaurant_finder))
     - 具備動態表單的餐桌預約流程
     - 由 Gemini 驅動的智慧體
     - 提供完整原始碼
 
-- **Component Gallery** ([samples/client/angular - gallery mode](https://github.com/a2ui-project/a2ui/tree/main/samples/client/angular))
+- **Component Gallery** ([samples/client/angular - gallery mode](../../../samples/client/angular))
     - 所有元件的互動式展示
     - 附帶程式碼的即時示例
     - 很適合作為學習材料

@@ -162,7 +162,7 @@ A2UI 透過 JSON 訊息描述 UI，並具備以下特性：
     }
     ```
 
-    v0.9 的主要差異在於：`createSurface` 取代了 `beginRendering`；元件採用更扁平的結構，用 `"component": "Text"` 取代巢狀物件；所有訊息都包含 `version` 欄位。
+    A2UI 訊息會以 `createSurface` 來初始化 surface，元件採用扁平結構，且所有訊息都包含 `version` 欄位。
 
 客戶端會將這些訊息渲染為原生元件（Angular、Flutter、React 等）。
 

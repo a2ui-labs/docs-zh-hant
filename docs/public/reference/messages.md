@@ -114,7 +114,7 @@
     }
     ```
 
-    在 v0.9 中，`createSurface` 取代了 `beginRendering`。根元件由慣例決定：`updateComponents` 中必須有一個元件的 `"id"` 為 `"root"`。`catalogId` 為必填。
+    根元件由慣例決定：`updateComponents` 中必須有一個元件的 `"id"` 為 `"root"`。`catalogId` 為必填。
 
 ---
 
@@ -281,7 +281,7 @@
 
     ### 元件物件
 
-    在 v0.9 中，元件結構更扁平：
+    元件結構是扁平的：
 
     - `id`（string，必填）：在此 surface 內的唯一識別符
     - `component`（string，必填）：元件類型名稱（例如 `"Text"`、`"Button"`）

@@ -202,7 +202,7 @@ yarn dev
     {"version": "v0.9.1", "updateDataModel": {"surfaceId": "main", "path": "/reservation", "value": {"date": "2025-12-15", "time": "19:00", "guests": 2}}}
     ```
 
-    注意：在 v0.9 中，`createSurface` 取代了 `beginRendering`；元件格式更扁平；資料模型也改為普通 JSON 值，而不是帶型別的 adjacency list。
+    注意：元件採用扁平格式，資料模型則使用一般 JSON 值。
 
 > 💡 **它本質上就是 JSON**
 >
@@ -216,8 +216,17 @@ yarn dev
 
 查看所有可用的 A2UI 元件：
 
+如果你是從全新複製的倉庫執行元件畫廊，請先建置畫廊本身及其工作區相依套件：
+
 ```bash
-yarn start gallery
+cd renderers/lit/a2ui_explorer
+yarn build
+```
+
+接著啟動元件畫廊：
+
+```bash
+yarn dev
 ```
 
 這會啟動一個純客戶端示例，展示所有標準元件（Card、Button、TextField、Timeline 等）的即時示例與程式碼片段。

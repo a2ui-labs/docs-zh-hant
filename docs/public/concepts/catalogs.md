@@ -222,45 +222,71 @@ A2UI 目錄必須是獨立的，不可引用外部檔案，這樣才能簡化 LL
 
 客戶端渲染器會透過將 schema 定義映射到實際程式碼來實作該目錄。
 
-以下是 hello world 目錄的 TypeScript 渲染器範例：
+首先，用 TypeScript 定義符合你目錄 schema 的元件 API：
 
 ```typescript
-import { Catalog, DEFAULT_CATALOG } from '@a2ui/angular';
-import { inputBinding } from '@angular/core';
+// api.ts
+import {ComponentApi} from '@a2ui/web_core/v0_9';
+import {z} from 'zod';
 
-export const RIZZ_CHARTS_CATALOG = {
-  ...DEFAULT_CATALOG, // 包含基礎目錄
-  HelloWorldBanner: {
-    type: () => import('./hello_world_banner').then((r) => r.HelloWorldBanner),
-    bindings: ({ properties }) => [
-      inputBinding('message', () => ('message' in properties && properties['message']) || undefined)
-    ],
-  },
-} as Catalog;
+export const HelloWorldBannerApi = {
+  name: 'HelloWorldBanner',
+  schema: z.object({
+    message: z.string(),
+    backgroundColor: z.string().default('#f0f0f0'),
+  }).strict(),
+} satisfies ComponentApi;
 ```
 
-以及 `hello_world_banner` 的實作：
+接著，實作繼承自 `CatalogComponent` 的元件：
 
 ```typescript
-import { DynamicComponent } from '@a2ui/angular';
-import { Component, Input } from '@angular/core';
+// hello_world_banner.ts
+import {CatalogComponent} from '@a2ui/angular/v0_9';
+import {Component, computed} from '@angular/core';
+import {HelloWorldBannerApi} from './api';
 
 @Component({
   selector: 'hello-world-banner',
-  imports: [],
   template: `
-    <div>
+    <div [style.background-color]="backgroundColor()">
       <h2>Hello World Banner</h2>
-      <p>{{ message }}</p>
+      <p>{{ message() }}</p>
     </div>
   `,
 })
-export class HelloWorldBanner extends DynamicComponent {
-  @Input() message?: string;
+export class HelloWorldBanner extends CatalogComponent<typeof HelloWorldBannerApi> {
+  protected readonly message = computed(() => this.props()['message']?.value() || '');
+  protected readonly backgroundColor = computed(() => this.props()['backgroundColor']?.value() || '#f0f0f0');
 }
 ```
 
+最後，在 `AngularCatalog` 中註冊你的自訂元件：
+
+```typescript
+// catalog.ts
+import {AngularCatalog, BASIC_COMPONENTS, BASIC_FUNCTIONS} from '@a2ui/angular/v0_9';
+import {HelloWorldBanner} from './hello_world_banner';
+import {HelloWorldBannerApi} from './api';
+
+const customBannerComponent = {
+  ...HelloWorldBannerApi,
+  component: HelloWorldBanner
+};
+
+export const MY_CATALOG = new AngularCatalog(
+  'https://github.com/.../hello_world/v1/catalog.json',
+  [...BASIC_COMPONENTS, customBannerComponent],
+  BASIC_FUNCTIONS
+);
+```
+
 你可以在 [Orchestrator 示範](../../../samples/community/client/angular/projects/orchestrator/src/a2ui-catalog/catalog.ts) 中看到可運作的客戶端渲染器範例。
+
+> [!NOTE]
+> Orchestrator 示範目前使用的是 v0.8 API。若想參考 v0.9 版本的目錄註冊範例，請見 Angular explorer 中的 [DemoCatalog](../../../renderers/angular/a2ui_explorer/src/app/demo-catalog.ts)。
+>
+> 此外，對於客戶端函式，客戶端會在執行期讀取當前啟用目錄定義中的設定，藉此決定該函式的執行邊界（例如是否為 `clientOnly`）。
 
 ## A2UI 目錄協商
 

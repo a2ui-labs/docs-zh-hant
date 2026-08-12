@@ -151,6 +151,6 @@ A2UI 要解決的問題是：**AI 智慧體如何在跨越信任邊界時，安�
 
 ### A2UI Composer
 
-CopilotKit 也提供一個公開可試用的 [A2UI Widget Builder](https://go.copilotkit.ai/A2UI-widget-builder)。
+我們提供了一個公開可用的 [A2UI Composer](https://a2ui-project.github.io/composer/)。
 
-[![A2UI Composer](assets/A2UI-widget-builder.png)](https://go.copilotkit.ai/A2UI-widget-builder)
+[A2UI Composer 文件](./composer/index.md)

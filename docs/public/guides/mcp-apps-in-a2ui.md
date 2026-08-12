@@ -26,8 +26,9 @@ Model Context Protocol (MCP) 允許 MCP server 向 host 交付丰富、互動式
     - 權限：不要在 host 模板中對它啟用 sandbox（例如 [`mcp-app.ts`](../../../samples/community/client/lit/mcp-apps-in-a2ui-sample/mcp-app.ts) 或 [`mcp-apps-component.ts`](../../../samples/community/client/lit/mcp-apps-in-a2ui-sample/ui/custom-components/mcp-apps-component.ts)）。
     - Host origin 驗證：驗證訊息來自預期的 host origin。
 2.  **嵌入式應用（內層 iframe）**：最內層的 `iframe`。透過 `srcdoc` 動態注入，並使用受限權限。
-    - 權限：`sandbox="allow-scripts allow-forms allow-popups allow-modals"`（**絕不能** 包含 `allow-same-origin`）。
+    - 權限：`sandbox="allow-scripts allow-forms allow-popups allow-modals"`（**絕不能** 包含 `allow-same-origin`、`allow-top-navigation` 或 `allow-top-navigation-by-user-activation`）。
     - 隔離：由於唯一 origin，移除對 `localStorage`、`sessionStorage`、`IndexedDB` 和 cookie 的存取。
+    - 防禦頂層視窗劫持：省略 `allow-top-navigation` 與 `allow-top-navigation-by-user-activation`，可以阻止被嵌入的腳本透過 frame busting 攻擊（例如 `window.top.location = "..."`）把 host 視窗重新導向到別處。
 
 ### 物理 iframe 嵌套
 

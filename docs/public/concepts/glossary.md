@@ -61,9 +61,41 @@ sequenceDiagram
 
 參見 [basic catalog](../specification/v1_0/catalogs/basic/catalog.json)。
 
+### Catalog Transformer
+
+一組規則，在產生系統提示詞指令或編譯 payload 驗證 schema 之前，以程式化方式對原始 **Catalog** 進行過濾、調整或改寫。
+
+#### 為什麼需要 Catalog Transformer
+
+雖然 catalog 完整描述了某個 renderer 所支援的全部 UI 元件與函式，但 agent 的實作往往需要針對特定場景裁剪或限制 catalog：
+
+- **上下文視窗 token 最佳化**：一個 catalog 可能定義了數十個元件與邏輯函式。把所有元件的 JSON schema 都注入 LLM 的系統提示詞，會消耗大量上下文視窗 token、增加提示詞延遲，並推高 LLM 推論成本。裁剪型 transformer 可以把系統提示詞指令限制在與該 agent 領域任務相關的元件子集上。
+- **面向任務的能力護欄**：特定的 agent 工作流程或安全角色可能需要限制互動能力（例如在訪客模式下允許展示型卡片與文字，但停用表單輸入或管理類元件）。
+- **精簡模型簽章**：裁剪函式規則與驗證項目，為更小或微型的 LLM 產生精簡的提示詞指令區塊。
+
+#### Catalog Transformer 範例
+
+- `ComponentPruningTransformer`：一個工具類別，依允許的元件名稱清單過濾 catalog。
+
+- `FunctionPruningTransformer`：一個工具類別，依允許的函式名稱清單過濾 catalog。
+
 ### Surface
 
 由 A2UI agent 構造、由 A2UI renderer 管理的一塊 UI 區域，由多個元件組成。Surface 不能嵌套。
+
+### A2UI Tag
+
+用來在 LLM 文字輸出中界定 A2UI payload 程式碼區塊的成對分隔標籤（例如 `<a2ui-json>`、`<a2ui>`）。
+
+由於 LLM 會在同一輪對話中同時串流輸出對話文字與 UI payload，A2UI Tag 提供了明確的語法邊界，把結構化的 UI 區塊與對話文字隔離開來。
+
+### Tag Unwrapping
+
+回應解析的第一個階段（`unwrap`）：解析器掃描 LLM 的文字回應，尋找開始與結束的 **A2UI Tag**，把非 UI 的對話文字（例如 _「以下是你的摘要：」_）與被包裹的原始 UI 程式碼區塊分離開來。
+
+### Compilation
+
+回應解析的第二個階段（`compile`）：把 unwrapping 階段擷取出的、由模型產生的 UI 程式碼字串區塊（例如標準 JSON、Express DSL 語法或 Elemental HTML 標籤）進行解析與反編譯，轉換成標準的 A2UI 協議 payload 字典（`createSurface`、`updateDataModel`）。
 
 ### Agent 架構
 

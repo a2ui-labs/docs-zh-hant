@@ -21,7 +21,7 @@
 
 ## A2UI vs AG-UI / CopilotKit
 
-[AG-UI](https://ag-ui.com/) 是一種 **傳輸協議**，用來把智慧體後端與前端以即時狀態同步的方式連接起來。A2UI 則是一種 **UI 格式**，也就是描述要渲染什麼內容的 payload。兩者是互補關係：把 AG-UI 當成管道，把 A2UI 當成內容即可。AG-UI 是 [CopilotKit](https://copilotkit.ai) 團隊的專案，他們同時也貢獻了 [A2UI Composer](../composer.md)。AG-UI 從第一天起就支援 A2UI。
+[AG-UI](https://ag-ui.com/) 是一種 **傳輸協議**，用來把智慧體後端與前端以即時狀態同步的方式連接起來。A2UI 則是一種 **UI 格式**，也就是描述要渲染什麼內容的 payload。兩者是互補關係：把 AG-UI 當成管道，把 A2UI 當成內容即可。AG-UI 是 [CopilotKit](https://copilotkit.ai) 團隊的專案。AG-UI 從第一天起就支援 A2UI。
 
 ## A2UI vs ChatKit（OpenAI）
 

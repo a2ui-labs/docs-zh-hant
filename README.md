@@ -64,7 +64,7 @@ A2UI 被設計為一種輕量格式，但它適用於更大的生態系：
 | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------ |
 | 🍜 **[Quickstart Restaurant Finder 示例](https://a2ui.org/quickstart/)**                                                      | 在本機執行完整的 A2UI 全端範例，搭配 Gemini 驅動的 ADK 智慧體與 Lit renderer。從頭到尾學習 A2UI，並依你的使用情境調整。 | ~5 分鐘 |
 | ⚛️ **[在任意 Agent 框架與 Harness 中使用 A2UI](docs/public/guides/a2ui-with-any-agent-framework.md)**                     | 為你選定的框架或 Harness 建立 AG-UI 應用或 Harness 腳手架，接著在 AG-UI 之上啟用 A2UI 渲染。                                   | ~5 分鐘 |
-| 🎨 **[A2UI Composer](https://a2ui-composer.ag-ui.com/)** · **[Widget Builder](https://go.copilotkit.ai/A2UI-widget-builder)** | 透過視覺化編輯器產生 A2UI JSON，貼到任何智慧體 prompt 中即可使用 — 不需安裝。                                                       | ~1 分鐘 |
+| 🎨 **[A2UI Composer](https://a2ui-project.github.io/composer/)**                                                             | 透過視覺化編輯器產生 A2UI JSON，貼到任何智慧體 prompt 中即可使用 — 不需安裝。                                                       | ~1 分鐘 |
 | 🎬 **[A2UI Theater](https://a2ui-composer.ag-ui.com/theater)**                                                                | 逐步查看預先建置好的 A2UI 串流情境，涵蓋 Lit、React 與 Angular renderer — 不需安裝。                                         | ~1 分鐘 |
 
 ### Restaurant Finder 示例 — 摘要

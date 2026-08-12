@@ -39,7 +39,9 @@ nav:
       - 如何使用？: introduction/how-to-use.md
       - A2UI 與其他方案如何比較？: introduction/agent-ui-ecosystem.md
   - 快速開始: quickstart.md
-  - A2UI Composer ⭐: composer.md
+  - A2UI Composer ⭐:
+      - composer/index.md
+      - Composer 整合: composer/composer_renderer_integration.md
   - 核心概念:
       - 概覽: concepts/overview.md
       - 詞彙表: concepts/glossary.md

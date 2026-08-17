@@ -1,3 +1,7 @@
+---
+render_macros: false
+---
+
 # A2UI Composer
 
 透過 **A2UI Composer**，以互動方式建構 A2UI 元件。

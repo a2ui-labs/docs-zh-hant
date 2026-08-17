@@ -1,3 +1,7 @@
+---
+render_macros: false
+---
+
 # A2UI 目錄
 
 ## 概覽
@@ -97,6 +101,7 @@
 ```json
 {
   "$id": "https://github.com/.../hello_world/v1/catalog.json",
+  "catalogId": "https://github.com/.../hello_world/v1/catalog.json",
   "components": {
     "HelloWorldBanner": {
       "type": "object",
@@ -168,6 +173,7 @@ A2UI 目錄必須是獨立的，不可引用外部檔案，這樣才能簡化 LL
 ```json
 {
   "$id": "https://github.com/.../hello_world_with_all_basic/v1/catalog.json",
+  "catalogId": "https://github.com/.../hello_world_with_all_basic/v1/catalog.json",
   "components": {
     "allOf": [
       { "$ref": "basic_catalog_definition.json#/components" },
@@ -198,6 +204,7 @@ A2UI 目錄必須是獨立的，不可引用外部檔案，這樣才能簡化 LL
 ```json
 {
   "$id": "https://github.com/.../hello_world_with_some_basic/v1/catalog.json",
+  "catalogId": "https://github.com/.../hello_world_with_some_basic/v1/catalog.json",
   "components": {
     "allOf": [
       { "$ref": "basic_catalog.json#/components/Text" },
@@ -369,6 +376,7 @@ A2UI 元件目錄需要版本控制，因為目錄定義通常是在編譯期建
 * **格式：** 雖然 `catalogId` 技術上是一個字串，但 A2UI 慣例是使用 **URI**（例如 `https://example.com/catalogs/mysurface/v1/catalog.json`）。
 * **用途：** 我們使用 URI 是為了讓 ID 在全域上唯一，也方便人類開發者在瀏覽器中檢視。
 * **不會於執行期抓取：** 這個 URI 並不代表智慧體或客戶端會在執行期下載目錄。**目錄定義必須在編譯 / 部署前就為智慧體與客戶端所知。** 這個 URI 只是一個穩定識別碼。
+* **JSON Schema 相容性（`$id` 與 `catalogId`）：** 由於 A2UI 目錄目前是以 JSON Schema 文件的形式表示，目錄定義應同時包含 `$id`（供 JSON Schema 工具使用）與 `catalogId`（供 A2UI SDK 與目錄協商使用），並將這兩個欄位設為相同的 URI。
 
 ### 版本控制指引
 

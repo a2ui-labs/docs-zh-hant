@@ -1,3 +1,7 @@
+---
+render_macros: false
+---
+
 # 撰寫自訂元件
 
 了解如何在 A2UI 中定義、實作和注冊自訂元件。本指南以 `rizzcharts` 範例為例，重點說明如何圍繞你的 Angular 程式碼來撰寫元件。

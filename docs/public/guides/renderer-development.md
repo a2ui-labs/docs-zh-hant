@@ -124,11 +124,10 @@ import * as Styles from '@a2ui/web_core/styles/index';
     包含 v0.9.1 的所有需求，並加上以下擴充：
     - **Surface 屬性**：
         - 處理帶有 `surfaceProperties`（取代 `theme`）的 `createSurface`。surface schema 內部不再支援自訂主要品牌色彩。
-    - **Action 回應（RPC）**：
-        - 處理來自 server、包含 `actionId` 以及回傳 `value` 或 `error` 的 `actionResponse` 訊息。
+    - **方向性函式呼叫（RPC）**：
+        - 處理來自智慧體的 `callRendererFunction` 訊息，並回傳 `rendererFunctionResponse`（或 `error`）。
     - **Client-to-Server 通訊**：
-        - 在 `action` payload 中產生並包含 `actionId`。
-        - 當 client 預期會收到回應時，於 action 上支援 `wantResponse: true`。
+        - 支援向智慧體發起 `callAgentFunction` 訊息，以執行遠端函式。
         - 若使用 A2A，傳送給 server 的每一則 A2A `Message` 都必須在其 `metadata` 欄位中包含 `a2uiClientCapabilities` 物件。
     - **能力**：
         - 在能力交換過程中，以 `surfaceProperties` 取代 `theme` 對外揭露。

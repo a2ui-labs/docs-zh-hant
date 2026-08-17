@@ -29,6 +29,7 @@ Model Context Protocol (MCP) 允許 MCP server 向 host 交付丰富、互動式
     - 權限：`sandbox="allow-scripts allow-forms allow-popups allow-modals"`（**絕不能** 包含 `allow-same-origin`、`allow-top-navigation` 或 `allow-top-navigation-by-user-activation`）。
     - 隔離：由於唯一 origin，移除對 `localStorage`、`sessionStorage`、`IndexedDB` 和 cookie 的存取。
     - 防禦頂層視窗劫持：省略 `allow-top-navigation` 與 `allow-top-navigation-by-user-activation`，可以阻止被嵌入的腳本透過 frame busting 攻擊（例如 `window.top.location = "..."`）把 host 視窗重新導向到別處。
+    - 防禦透過超連結的資料外洩：省略 `allow-popups` 並攔截連結導覽，可以阻止不受信任的內容透過點擊劫持到新開啟的視窗來外洩資料。
 
 ### 物理 iframe 嵌套
 
